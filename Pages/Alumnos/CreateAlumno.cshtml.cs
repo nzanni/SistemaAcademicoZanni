@@ -20,6 +20,7 @@ namespace SistemaAcademicoZanni.Pages.Alumnos
             {
                 return Page();
             }
+            Alumno.Id = DatosCompartidos.ObtenerNuevoIdAlumno();
             DatosCompartidos.Alumnos.Add(Alumno);
             return RedirectToPage("IndexAlumno");
         }

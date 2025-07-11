@@ -1,5 +1,9 @@
 ﻿@page
 @model SistemaAcademicoZanni.Pages.Alumnos.IndexModel
+@{
+
+}
+<a asp-page="CreateAlumno" class="btn btn-success mb-3">Agregar Alumno</a>
 @if(Model.Alumnos.Count == 0) {
         <p class="text-muted">No hay alumnos cargados </p>
     }
@@ -28,6 +32,11 @@ else {
                 <td>@alumno.Email</td>
                 <td>@alumno.FechaDeNacimiento.ToShortDateString()</td>
             </tr>
+            <td>
+                <a asp-page="EditAlumno" asp-route-id="@alumno.Id" class="btn btn-warning btn-sm">Editar</a>
+                <a asp-page="DeleteAlumno" asp-route-id="@alumno.Id" class="btn btn-danger btn-sm">Eliminar</a>
+            </td>
+
         }
     </tbody>
 </table>
