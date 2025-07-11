@@ -1,0 +1,31 @@
+﻿@page
+@model SistemaAcademicoZanni.Pages.Alumnos.IndexModel
+@{
+}
+<h2>Listado de Alumnos</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>DNI</th>
+            <th>Email</th>
+            <th>Fecha de nacimiento</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var alumno in Model.Alumnos)
+        {
+            <tr>
+                <td>@alumno.Id</td>
+                <td>@alumno.Nombre</td>
+                <td>@alumno.Apellido</td>
+                <td>@alumno.DNI</td>
+                <td>@alumno.Email</td>
+                <td>@alumno.FechaDeNacimiento.ToShortDateString()</td>
+            </tr>
+        }
+    </tbody>
+</table>

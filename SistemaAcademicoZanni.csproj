@@ -6,4 +6,9 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Include="wwwroot\estilos.css" />
+    <None Include="wwwroot\tabla.html" />
+  </ItemGroup>
+
 </Project>

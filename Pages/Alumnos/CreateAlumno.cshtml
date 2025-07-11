@@ -1,0 +1,32 @@
+﻿@page
+@model SistemaAcademicoZanni.Pages.Alumnos.CreateAlumnoModel
+@{
+}
+<form method="post">
+    <div class="form-group">
+        <label asp-for="Alumno.Nombre"></label>
+        <input asp-for="Alumno.Nombre" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Alumno.Apellido"></label>
+        <input asp-for="Alumno.Apellido" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Alumno.DNI"></label>
+        <input asp-for="Alumno.DNI" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Alumno.Email"></label>
+        <input asp-for="Alumno.Email" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Alumno.FechaDeNacimiento"></label>
+        <input asp-for="Alumno.FechaDeNacimiento" class="form-control" type="date" />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Guardar</button>
+</form>
