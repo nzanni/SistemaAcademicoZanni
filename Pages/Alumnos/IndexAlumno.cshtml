@@ -1,7 +1,9 @@
 ﻿@page
 @model SistemaAcademicoZanni.Pages.Alumnos.IndexModel
-@{
-}
+@if(Model.Alumnos.Count == 0) {
+        <p class="text-muted">No hay alumnos cargados </p>
+    }
+else {
 <h2>Listado de Alumnos</h2>
 
 <table class="table">
@@ -29,3 +31,4 @@
         }
     </tbody>
 </table>
+}

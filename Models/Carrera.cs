@@ -1,11 +1,17 @@
-﻿namespace SistemaAcademicoZanni.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace SistemaAcademicoZanni.Models
 {
     public class Carrera
     {
         public int Id { get; set; }
-        public string? Nombre { get; set; }
+        [Required]
+        public string Nombre { get; set; }
+        [Required]
         public int DuracionAnios { get; set; }
-        public string? TituloOtorgado { get; set; }
-        public string? Modalidad { get; set; }
+        [Required]
+        public string TituloOtorgado { get; set; }
+        [Required]
+        public string Modalidad { get; set; }
     }
 }

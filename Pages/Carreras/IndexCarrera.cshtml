@@ -1,9 +1,10 @@
 ﻿@page
 @model IndexModel
-@{
-    ViewData["Title"] = "Lista de Carreras";
-}
-
+ @if (Model.Carreras.Count == 0)
+    {
+        <p class="text-muted">No hay carreras cargadas </p>
+    }
+    else { 
 <h2>Listado de Carreras</h2>
 
 <table class="table">
@@ -29,3 +30,4 @@
         }
     </tbody>
 </table>
+}

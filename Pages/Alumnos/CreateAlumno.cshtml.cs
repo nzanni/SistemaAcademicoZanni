@@ -14,13 +14,12 @@ namespace SistemaAcademicoZanni.Pages.Alumnos
         [BindProperty]
     public Alumno Alumno { get; set; }
 
-
-   // public static List<Alumno> listaAlumnos = new List<Alumno>();
-    private static int ultimoId = 0;
  public IActionResult OnPost()
         {
-            ultimoId++;
-            Alumno.Id = ultimoId;
+            if (!ModelState.IsValid)
+            {
+                return Page();
+            }
             DatosCompartidos.Alumnos.Add(Alumno);
             return RedirectToPage("IndexAlumno");
         }

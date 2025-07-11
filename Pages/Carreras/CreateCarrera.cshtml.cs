@@ -14,13 +14,14 @@ namespace SistemaAcademicoZanni.Pages.Carreras
         [BindProperty]
         public Carrera Carrera { get; set; }
 
-        public static List<Carrera> listaCarreras = new List<Carrera>();
-        private static int ultimoId = 0;
-
         public IActionResult OnPost()
         {
-            ultimoId++;
-            Carrera.Id = ultimoId;
+            if (!ModelState.IsValid)
+            {
+                return Page();
+            }
+            Carrera.Id = DatosCompartidos.ObtenerNuevoIdCarrera();
+
             DatosCompartidos.Carreras.Add(Carrera);
             return RedirectToPage("IndexCarrera");
         }
