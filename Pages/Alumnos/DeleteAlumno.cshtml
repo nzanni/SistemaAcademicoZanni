@@ -2,3 +2,29 @@
 @model SistemaAcademicoZanni.Pages.Alumnos.DeleteAlumnoModel
 @{
 }
+<input type="hidden" asp-for="Alumno.Id" />
+
+<form method="post">
+    <h4>¿Estás seguro que querés eliminar este alumno?</h4>
+
+    <div>
+        <strong>Nombre:</strong> @Model.Alumno.Nombre
+    </div>
+    <div>
+        <strong>Apellido:</strong> @Model.Alumno.Apellido
+    </div>
+    <div>
+        <strong>DNI:</strong> @Model.Alumno.DNI
+    </div>
+    <div>
+        <strong>EMail:</strong> @Model.Alumno.Email
+    </div>
+    <div>
+        <strong>Fecha de Nacimiento:</strong> @Model.Alumno.FechaDeNacimiento.ToShortDateString()
+    </div>
+
+    <br />
+
+    <button type="submit" class="btn btn-danger">Eliminar</button>
+    <a asp-page="IndexAlumno" class="btn btn-secondary">Cancelar</a>
+</form>
