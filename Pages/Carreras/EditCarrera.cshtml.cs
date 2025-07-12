@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using SistemaAcademicoZanni.Helpers;
 using SistemaAcademicoZanni.Models;
 using static SistemaAcademicoZanni.Data.DatosCompartidosModel;
 
@@ -10,9 +11,12 @@ namespace SistemaAcademicoZanni.Pages.Carreras
     
         [BindProperty]
         public Carrera Carrera { get; set; }
+        public List<string> Modalidades { get; set; } = new();
 
         public void OnGet(int id)
         {
+            Modalidades = OpcionesModalidad.Lista;
+
             foreach (var c in DatosCompartidos.Carreras)
             {
                 if (c.Id == id)
@@ -24,6 +28,7 @@ namespace SistemaAcademicoZanni.Pages.Carreras
         }
         public IActionResult OnPost()
         {
+            Modalidades = OpcionesModalidad.Lista;
 
             if (!ModelState.IsValid)
             {

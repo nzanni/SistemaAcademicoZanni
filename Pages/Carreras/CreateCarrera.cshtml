@@ -24,7 +24,11 @@
 
         <div class="form-group">
             <label asp-for="Carrera.Modalidad"></label>
-            <input asp-for="Carrera.Modalidad" class="form-control" />
+        <select asp-for="Carrera.Modalidad"
+                asp-items="@(new SelectList(Model.Modalidades))"
+                class="form-control">
+            <option value="">Seleccione una opción</option>
+        </select>
         <span asp-validation-for="Carrera.Modalidad" class="text-danger"></span>
         </div>
 
