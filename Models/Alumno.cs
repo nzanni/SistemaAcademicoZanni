@@ -9,6 +9,7 @@ namespace SistemaAcademicoZanni.Models
         public string Nombre { get; set; }
         [Required(ErrorMessage = "El apellido es obligatorio.")]
         public string Apellido { get; set; }
+        [Required(ErrorMessage = "El DNI es obligatorio.")]
         [Range(1000000, 99999999, ErrorMessage = "El DNI debe tener entre 7 y 8 dígitos.")]
         public int? DNI { get; set; }
         [Required(ErrorMessage = "El email es obligatorio.")]
