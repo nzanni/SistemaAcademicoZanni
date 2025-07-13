@@ -12,8 +12,9 @@ namespace SistemaAcademicoZanni.Pages.Alumnos
 
             public void OnGet()
             {
-                Alumnos = ServicioAlumno.ObtenerAlumnos();
-            }
+            var RepoAlumno = new RepositorioCrudJson<Alumno>("alumnos");
+            Alumnos = RepoAlumno.ObtenerTodos();
+        }
         }
     }
 

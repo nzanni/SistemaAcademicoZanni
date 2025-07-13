@@ -12,7 +12,8 @@ namespace SistemaAcademicoZanni.Pages.Carreras
 
             public void OnGet()
             {
-                Carreras = ServicioCarrera.ObtenerCarreras();
-            }
+            var RepoCarrera = new RepositorioCrudJson<Carrera>("carreras");
+            Carreras = RepoCarrera.ObtenerTodos();
+        }
         }
     }
