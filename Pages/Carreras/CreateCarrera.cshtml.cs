@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using SistemaAcademicoZanni.Helpers;
 using SistemaAcademicoZanni.Models;
+using SistemaAcademicoZanni.Servicios;
 using System.Collections.Generic;
 using static SistemaAcademicoZanni.Data.DatosCompartidosModel;
 
@@ -26,9 +27,9 @@ namespace SistemaAcademicoZanni.Pages.Carreras
             {
                 return Page();
             }
-            Carrera.Id = DatosCompartidos.ObtenerNuevoIdCarrera();
 
-            DatosCompartidos.Carreras.Add(Carrera);
+
+            ServicioCarrera.AgregarCarrera(Carrera);
             return RedirectToPage("IndexCarrera");
         }
 

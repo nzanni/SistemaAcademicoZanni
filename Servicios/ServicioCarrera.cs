@@ -1,5 +1,7 @@
 ﻿using SistemaAcademicoZanni.Models;
 using System.Text.Json;
+using static SistemaAcademicoZanni.Data.DatosCompartidosModel;
+
 
 namespace SistemaAcademicoZanni.Servicios
 {
@@ -9,9 +11,9 @@ namespace SistemaAcademicoZanni.Servicios
 
         public static string LeerTextoDelArchivo()
         {
-            if (File.Exists(ruta))
+            if (File.Exists("Data/carreras.json"))
             {
-                return File.ReadAllText(ruta);
+                return File.ReadAllText("Data/carreras.json");
             }
 
             return "[]";
@@ -21,6 +23,18 @@ namespace SistemaAcademicoZanni.Servicios
             string json = LeerTextoDelArchivo();
             var lista = JsonSerializer.Deserialize<List<Carrera>>(json);
             return lista ?? new List<Carrera>();
+        }
+        public static void GuardarCarreras(List<Carrera> carreras)
+        {
+            string textoJson = JsonSerializer.Serialize(carreras);
+            File.WriteAllText("Data/carreras.json", textoJson);
+        }
+        public static void AgregarCarrera(Carrera nuevaCarrera)
+        {
+            var carreras = ObtenerCarreras();
+            nuevaCarrera.Id = DatosCompartidos.ObtenerNuevoIdCarrera(carreras);
+            carreras.Add(nuevaCarrera);
+            GuardarCarreras(carreras);
         }
     }
 }

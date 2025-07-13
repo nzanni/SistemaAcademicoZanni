@@ -14,17 +14,37 @@ namespace SistemaAcademicoZanni.Data
     {
         public static List<Carrera> Carreras { get; set; } = new List<Carrera>();
             private static int ultimoIdCarrera = 0;
-            public static int ObtenerNuevoIdCarrera()
+
+            public static int ObtenerNuevoIdCarrera(List<Carrera> carreras)
             {
-                ultimoIdCarrera++;
-                return ultimoIdCarrera;
+                int maxId = 0;
+
+                foreach (var carrera in carreras)
+                {
+                    if (carrera.Id > maxId)
+                    {
+                        maxId = carrera.Id;
+                    }
+                }
+
+                return maxId + 1;
             }
+
             public static List<Alumno> Alumnos { get; set; } = new List<Alumno>();
             private static int ultimoIdAlumno = 0;
-            public static int ObtenerNuevoIdAlumno()
+            public static int ObtenerNuevoIdAlumno(List<Alumno> alumnos)
             {
-                ultimoIdAlumno++;
-                return ultimoIdAlumno;
+                int maxId = 0;
+
+                foreach (var alumno in alumnos)
+                {
+                    if (alumno.Id > maxId)
+                    {
+                        maxId = alumno.Id;
+                    }
+                }
+
+                return maxId + 1;
             }
         }
 

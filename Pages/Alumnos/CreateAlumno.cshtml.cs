@@ -2,17 +2,18 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using SistemaAcademicoZanni.Data;
 using SistemaAcademicoZanni.Models;
+using SistemaAcademicoZanni.Servicios;
 using static SistemaAcademicoZanni.Data.DatosCompartidosModel;
 
 namespace SistemaAcademicoZanni.Pages.Alumnos
 {
     public class CreateAlumnoModel : PageModel
     {
+        [BindProperty]
+        public Alumno Alumno { get; set; }
         public void OnGet()
         {
         }
-        [BindProperty]
-    public Alumno Alumno { get; set; }
 
  public IActionResult OnPost()
         {
@@ -20,8 +21,8 @@ namespace SistemaAcademicoZanni.Pages.Alumnos
             {
                 return Page();
             }
-            Alumno.Id = DatosCompartidos.ObtenerNuevoIdAlumno();
-            DatosCompartidos.Alumnos.Add(Alumno);
+
+            ServicioAlumno.AgregarAlumno(Alumno);
             return RedirectToPage("IndexAlumno");
         }
     }
