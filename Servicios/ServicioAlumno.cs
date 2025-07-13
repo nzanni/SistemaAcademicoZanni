@@ -35,5 +35,38 @@ public static void AgregarAlumno(Alumno nuevoAlumno)
             alumnos.Add(nuevoAlumno);
             GuardarAlumnos(alumnos);
         }
+
+        public static Alumno? BuscarPorId(int id)
+        {
+            var lista = ObtenerAlumnos();
+            foreach (var alumno in lista)
+            {
+                if (alumno.Id == id)
+                {
+                    return alumno;
+                }
+            }
+            return null;
+        }
+        public static void EliminarPorId(int id)
+        {
+            var lista = ObtenerAlumnos();
+            Alumno? alumnoAEliminar = null;
+
+            foreach (var alumno in lista)
+            {
+                if (alumno.Id == id)
+                {
+                    alumnoAEliminar = alumno;
+                    break;
+                }
+            }
+
+            if (alumnoAEliminar != null)
+            {
+                lista.Remove(alumnoAEliminar);
+                GuardarAlumnos(lista);
+            }
+        }
     }
 }

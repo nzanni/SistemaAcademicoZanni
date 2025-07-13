@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using SistemaAcademicoZanni.Models;
+using SistemaAcademicoZanni.Servicios;
 using static SistemaAcademicoZanni.Data.DatosCompartidosModel;
 
 namespace SistemaAcademicoZanni.Pages.Alumnos
@@ -10,38 +11,23 @@ namespace SistemaAcademicoZanni.Pages.Alumnos
         [BindProperty]
         public Alumno Alumno { get; set; }
 
-        public void OnGet(int id)
+        public IActionResult OnGet(int id)
         {
 
-            foreach (var c in DatosCompartidos.Alumnos)
+            var alumno = ServicioAlumno.BuscarPorId(id);
+            if (alumno == null)
             {
-                if (c.Id == id)
-                {
-                    Alumno = c;
-                    break;
-                }
+                return RedirectToPage("IndexAlumno");
             }
+
+            Alumno = alumno;
+            return Page();
         }
-        public IActionResult OnPost()
+        public IActionResult OnPost(int id)
         {
-            Alumno alumnoAEliminar = null;
-
-            foreach (var c in DatosCompartidos.Alumnos)
-            {
-                if (c.Id == Alumno.Id)
-                {
-                    alumnoAEliminar = c;
-                    break;
-                }
-            }
-
-            if (alumnoAEliminar != null)
-            {
-                DatosCompartidos.Alumnos.Remove(alumnoAEliminar);
-            }
-
+            ServicioAlumno.EliminarPorId(id);
             return RedirectToPage("IndexAlumno");
-        }
 
+        }
     }
 }

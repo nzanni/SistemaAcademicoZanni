@@ -36,5 +36,38 @@ namespace SistemaAcademicoZanni.Servicios
             carreras.Add(nuevaCarrera);
             GuardarCarreras(carreras);
         }
+
+        public static Carrera? BuscarPorId(int id)
+        {
+            var lista = ObtenerCarreras();
+            foreach (var carrera in lista)
+            {
+                if (carrera.Id == id)
+                {
+                    return carrera;
+                }
+            }
+            return null;
+        }
+        public static void EliminarPorId(int id)
+        {
+            var lista = ObtenerCarreras();
+            Carrera? carreraAEliminar = null;
+
+            foreach (var carrera in lista)
+            {
+                if (carrera.Id == id)
+                {
+                    carreraAEliminar = carrera;
+                    break;
+                }
+            }
+
+            if (carreraAEliminar != null)
+            {
+                lista.Remove(carreraAEliminar);
+                GuardarCarreras(lista);
+            }
+        }
     }
 }
