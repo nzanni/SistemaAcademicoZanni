@@ -1,0 +1,27 @@
+﻿
+    [
+      {
+        "Id": 1,
+        "Nombre": "Lucía",
+        "Apellido": "Gómez",
+        "DNI": 34567890,
+        "Email": "lucia.gomez@email.com",
+        "FechaDeNacimiento": "2002-05-14"
+      },
+      {
+        "Id": 2,
+        "Nombre": "Martín",
+        "Apellido": "Pérez",
+        "DNI": 32123456,
+        "Email": "martin.perez@email.com",
+        "FechaDeNacimiento": "2001-11-03"
+      },
+      {
+        "Id": 3,
+        "Nombre": "Sofía",
+        "Apellido": "Fernández",
+        "DNI": 30111222,
+        "Email": "sofia.fernandez@email.com",
+        "FechaDeNacimiento": "2003-02-20"
+      }
+    ]
