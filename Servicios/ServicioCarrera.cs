@@ -37,9 +37,8 @@ namespace SistemaAcademicoZanni.Servicios
             GuardarCarreras(carreras);
         }
 
-        public static Carrera? BuscarPorId(int id)
+        private static Carrera? BuscarCarreraPorId(List<Carrera> lista, int id)
         {
-            var lista = ObtenerCarreras();
             foreach (var carrera in lista)
             {
                 if (carrera.Id == id)
@@ -47,46 +46,43 @@ namespace SistemaAcademicoZanni.Servicios
                     return carrera;
                 }
             }
+
             return null;
         }
+
+        public static Carrera? BuscarPorId(int id)
+        {
+            var lista = ObtenerCarreras();
+            return BuscarCarreraPorId(lista, id);
+        }
+
         public static void EliminarPorId(int id)
         {
             var lista = ObtenerCarreras();
-            Carrera? carreraAEliminar = null;
-
-            foreach (var carrera in lista)
-            {
-                if (carrera.Id == id)
-                {
-                    carreraAEliminar = carrera;
-                    break;
-                }
-            }
-
+            var carreraAEliminar = BuscarCarreraPorId(lista, id);
             if (carreraAEliminar != null)
             {
                 lista.Remove(carreraAEliminar);
                 GuardarCarreras(lista);
             }
-        }
 
+        }
         public static void EditarCarrera(Carrera carreraEditada)
         {
             var lista = ObtenerCarreras();
+            var carrera = BuscarCarreraPorId(lista, carreraEditada.Id);
 
-            foreach (var c in lista)
-            {
-                if (c.Id == carreraEditada.Id)
+                if (carrera != null)
+
                 {
-                    c.Nombre = carreraEditada.Nombre;
-                    c.Modalidad = carreraEditada.Modalidad;
-                    c.DuracionAnios = carreraEditada.DuracionAnios;
-                    c.TituloOtorgado = carreraEditada.TituloOtorgado;
-                    break;
-                }
-            }
+                    carrera.Nombre = carreraEditada.Nombre;
+                    carrera.Modalidad = carreraEditada.Modalidad;
+                    carrera.DuracionAnios = carreraEditada.DuracionAnios;
+                    carrera.TituloOtorgado = carreraEditada.TituloOtorgado;
 
             GuardarCarreras(lista);
+            }
         }
+
     }
 }

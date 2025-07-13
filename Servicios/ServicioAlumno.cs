@@ -36,9 +36,8 @@ public static void AgregarAlumno(Alumno nuevoAlumno)
             GuardarAlumnos(alumnos);
         }
 
-        public static Alumno? BuscarPorId(int id)
+        private static Alumno? BuscarAlumnoPorId(List<Alumno> lista, int id)
         {
-            var lista = ObtenerAlumnos();
             foreach (var alumno in lista)
             {
                 if (alumno.Id == id)
@@ -46,47 +45,45 @@ public static void AgregarAlumno(Alumno nuevoAlumno)
                     return alumno;
                 }
             }
+
             return null;
         }
+
+        public static Alumno? BuscarPorId(int id)
+        {
+            var lista = ObtenerAlumnos();
+            return BuscarAlumnoPorId(lista, id);
+        }
+
         public static void EliminarPorId(int id)
         {
             var lista = ObtenerAlumnos();
-            Alumno? alumnoAEliminar = null;
-
-            foreach (var alumno in lista)
-            {
-                if (alumno.Id == id)
-                {
-                    alumnoAEliminar = alumno;
-                    break;
-                }
-            }
-
+            var alumnoAEliminar = BuscarAlumnoPorId(lista, id);
             if (alumnoAEliminar != null)
             {
                 lista.Remove(alumnoAEliminar);
                 GuardarAlumnos(lista);
             }
-        }
 
+        }
         public static void EditarAlumno(Alumno alumnoEditado)
         {
             var lista = ObtenerAlumnos();
+            var alumno = BuscarAlumnoPorId(lista, alumnoEditado.Id);
 
-            foreach (var a in lista)
+            if (alumno != null)
+
             {
-                if (a.Id == alumnoEditado.Id)
-                {
-                    a.Nombre = alumnoEditado.Nombre;
-                    a.Apellido = alumnoEditado.Apellido;
-                    a.DNI = alumnoEditado.DNI;
-                    a.Email = alumnoEditado.Email;
-                    a.FechaDeNacimiento = alumnoEditado.FechaDeNacimiento;
-                    break;
-                }
-            }
+                alumno.Nombre = alumnoEditado.Nombre;
+                alumno.Apellido = alumnoEditado.Apellido;
+                alumno.DNI = alumnoEditado.DNI;
+                alumno.Email = alumnoEditado.Email;
+                alumno.FechaDeNacimiento = alumnoEditado.FechaDeNacimiento;
 
-            GuardarAlumnos(lista);
+
+                GuardarAlumnos(lista);
+            }
         }
+
     }
 }
