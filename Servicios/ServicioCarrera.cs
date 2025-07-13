@@ -69,5 +69,24 @@ namespace SistemaAcademicoZanni.Servicios
                 GuardarCarreras(lista);
             }
         }
+
+        public static void EditarCarrera(Carrera carreraEditada)
+        {
+            var lista = ObtenerCarreras();
+
+            foreach (var c in lista)
+            {
+                if (c.Id == carreraEditada.Id)
+                {
+                    c.Nombre = carreraEditada.Nombre;
+                    c.Modalidad = carreraEditada.Modalidad;
+                    c.DuracionAnios = carreraEditada.DuracionAnios;
+                    c.TituloOtorgado = carreraEditada.TituloOtorgado;
+                    break;
+                }
+            }
+
+            GuardarCarreras(lista);
+        }
     }
 }

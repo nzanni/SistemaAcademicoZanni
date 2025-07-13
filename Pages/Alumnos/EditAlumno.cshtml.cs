@@ -1,6 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using SistemaAcademicoZanni.Helpers;
 using SistemaAcademicoZanni.Models;
+using SistemaAcademicoZanni.Servicios;
 using System.ComponentModel.DataAnnotations;
 using static SistemaAcademicoZanni.Data.DatosCompartidosModel;
 
@@ -14,36 +16,19 @@ namespace SistemaAcademicoZanni.Pages.Alumnos
 
         public void OnGet(int id)
         {
-            foreach (var c in DatosCompartidos.Alumnos)
+
+            Alumno? alumno = ServicioAlumno.BuscarPorId(id);
+            if (alumno != null)
             {
-                if (c.Id == id)
-                {
-                    Alumno = c;
-                    break;
-                }
+                Alumno = alumno;
             }
         }
+
         public IActionResult OnPost()
         {
 
-            if (!ModelState.IsValid)
-            {
-                return Page();
-            }
+            ServicioAlumno.EditarAlumno(Alumno);
 
-
-            foreach (var a in DatosCompartidos.Alumnos)
-            {
-                if (a.Id == Alumno.Id)
-                {
-                    a.Nombre = Alumno.Nombre;
-                    a.Apellido = Alumno.Apellido;
-                    a.DNI= Alumno.DNI;
-                    a.Email = Alumno.Email;
-                    a.FechaDeNacimiento = Alumno.FechaDeNacimiento;
-                    break;
-                }
-            }
             return RedirectToPage("IndexAlumno");
         }
     }

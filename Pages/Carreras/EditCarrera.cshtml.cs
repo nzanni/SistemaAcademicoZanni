@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using SistemaAcademicoZanni.Helpers;
 using SistemaAcademicoZanni.Models;
+using SistemaAcademicoZanni.Servicios;
 using static SistemaAcademicoZanni.Data.DatosCompartidosModel;
 
 namespace SistemaAcademicoZanni.Pages.Carreras
@@ -13,20 +14,18 @@ namespace SistemaAcademicoZanni.Pages.Carreras
         public Carrera Carrera { get; set; }
         public List<string> Modalidades { get; set; } = new();
 
-        public void OnGet(int id)
+public void OnGet(int id)
         {
             Modalidades = OpcionesModalidad.Lista;
 
-            foreach (var c in DatosCompartidos.Carreras)
+            Carrera? carrera = ServicioCarrera.BuscarPorId(id);
+            if (carrera != null)
             {
-                if (c.Id == id)
-                {
-                    Carrera = c;
-                    break;
-                }
+                Carrera = carrera;
             }
         }
-        public IActionResult OnPost()
+     
+public IActionResult OnPost()
         {
             Modalidades = OpcionesModalidad.Lista;
 
@@ -35,20 +34,9 @@ namespace SistemaAcademicoZanni.Pages.Carreras
                 return Page();
             }
 
+            ServicioCarrera.EditarCarrera(Carrera);
 
-            foreach (var c in DatosCompartidos.Carreras)
-            {
-                if (c.Id == Carrera.Id)
-                {
-                    c.Nombre = Carrera.Nombre;
-                    c.Modalidad = Carrera.Modalidad;
-                    c.DuracionAnios = Carrera.DuracionAnios;
-                    c.TituloOtorgado = Carrera.TituloOtorgado;
-                    break;
-                }
-            }
             return RedirectToPage("IndexCarrera");
         }
     }
-}
-//
+    }

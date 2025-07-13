@@ -68,5 +68,25 @@ public static void AgregarAlumno(Alumno nuevoAlumno)
                 GuardarAlumnos(lista);
             }
         }
+
+        public static void EditarAlumno(Alumno alumnoEditado)
+        {
+            var lista = ObtenerAlumnos();
+
+            foreach (var a in lista)
+            {
+                if (a.Id == alumnoEditado.Id)
+                {
+                    a.Nombre = alumnoEditado.Nombre;
+                    a.Apellido = alumnoEditado.Apellido;
+                    a.DNI = alumnoEditado.DNI;
+                    a.Email = alumnoEditado.Email;
+                    a.FechaDeNacimiento = alumnoEditado.FechaDeNacimiento;
+                    break;
+                }
+            }
+
+            GuardarAlumnos(lista);
+        }
     }
 }
