@@ -28,7 +28,7 @@ namespace SistemaAcademicoZanni.Pages.Alumnos
         {
         }
 
- public IActionResult OnPost()
+        public IActionResult OnPost()
         {
             if (!ModelState.IsValid)
             {
