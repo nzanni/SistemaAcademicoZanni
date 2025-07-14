@@ -58,7 +58,7 @@ namespace SistemaAcademicoZanni.Servicios
             var propiedadId = typeof(T).GetProperty("Id");
             propiedadId.SetValue(entidad, nuevoId);
 
-            lista.Add(entidad)
+            lista.Add(entidad);
     Guardar(lista);
         }
 
@@ -103,6 +103,19 @@ namespace SistemaAcademicoZanni.Servicios
                 propiedad.SetValue(entidadExistente, nuevoValor);
             }
         }
+        public void Editar(T entidadNueva)
+        {
+            var lista = ObtenerTodos();
+            var propiedadId = typeof(T).GetProperty("Id");
+            int id = (int)propiedadId.GetValue(entidadNueva);
 
+            var entidadExistente = BuscarEnListaPorId(lista, id);
+            if (entidadExistente != null)
+            {
+                ActualizarPropiedades(entidadExistente, entidadNueva);
+                Guardar(lista);
+            }
+
+        }
     }
-}
+        }

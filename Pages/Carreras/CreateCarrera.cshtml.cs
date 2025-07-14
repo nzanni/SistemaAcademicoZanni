@@ -13,6 +13,13 @@ namespace SistemaAcademicoZanni.Pages.Carreras
         [BindProperty]
         public Carrera Carrera { get; set; }
         public List<string> Modalidades { get; set; } = new();
+        private readonly ServicioCarrera servicio;
+
+        public CreateCarreraModel()
+        {
+            servicio = new ServicioCarrera();
+        }
+
 
         public void OnGet()
         {
@@ -29,7 +36,7 @@ namespace SistemaAcademicoZanni.Pages.Carreras
             }
 
 
-            ServicioCarrera.AgregarCarrera(Carrera);
+            servicio.Agregar(Carrera);
             return RedirectToPage("IndexCarrera");
         }
 

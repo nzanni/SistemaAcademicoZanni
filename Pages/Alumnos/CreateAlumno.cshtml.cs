@@ -11,6 +11,16 @@ namespace SistemaAcademicoZanni.Pages.Alumnos
     {
         [BindProperty]
         public Alumno Alumno { get; set; }
+
+        private readonly ServicioAlumno servicio;
+
+        public CreateAlumnoModel()
+        {
+            servicio = new ServicioAlumno();
+        }
+
+
+
         public void OnGet()
         {
         }
@@ -22,7 +32,7 @@ namespace SistemaAcademicoZanni.Pages.Alumnos
                 return Page();
             }
 
-            ServicioAlumno.AgregarAlumno(Alumno);
+            servicio.Agregar(Alumno);
             return RedirectToPage("IndexAlumno");
         }
     }

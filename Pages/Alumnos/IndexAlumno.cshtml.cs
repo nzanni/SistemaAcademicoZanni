@@ -10,10 +10,16 @@ namespace SistemaAcademicoZanni.Pages.Alumnos
         {
             public List<Alumno> Alumnos { get; set; }
 
-            public void OnGet()
+
+        private readonly ServicioAlumno servicio;
+
+        public IndexModel()
+        {
+            servicio = new ServicioAlumno();
+        }
+        public void OnGet()
             {
-            var RepoAlumno = new RepositorioCrudJson<Alumno>("alumnos");
-            Alumnos = RepoAlumno.ObtenerTodos();
+            Alumnos = servicio.ObtenerTodos();
         }
         }
     }

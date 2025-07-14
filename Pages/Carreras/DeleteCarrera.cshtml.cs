@@ -10,11 +10,18 @@ namespace SistemaAcademicoZanni.Pages.Carreras
     {
         [BindProperty]
         public Carrera Carrera { get; set; }
+        private readonly ServicioCarrera servicio;
+
+
+        public DeleteCarreraModel()
+        {
+            servicio = new ServicioCarrera();
+        }
 
         public IActionResult OnGet(int id)
         {
 
-            var carrera = ServicioCarrera.BuscarPorId(id);
+            var carrera = servicio.BuscarPorId(id);
             if (carrera == null)
             {
                 return RedirectToPage("IndexCarrera");
@@ -25,7 +32,7 @@ namespace SistemaAcademicoZanni.Pages.Carreras
         }
 public IActionResult OnPost(int id)
         {
-            ServicioCarrera.EliminarPorId(id);
+            servicio.EliminarPorId(id);
             return RedirectToPage("IndexCarrera");
 
         }

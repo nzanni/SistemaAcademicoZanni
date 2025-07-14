@@ -10,10 +10,17 @@ namespace SistemaAcademicoZanni.Pages.Carreras
     {
             public List<Carrera> Carreras { get; set; }
 
-            public void OnGet()
-            {
-            var RepoCarrera = new RepositorioCrudJson<Carrera>("carreras");
-            Carreras = RepoCarrera.ObtenerTodos();
+        private readonly ServicioCarrera servicio;
+
+        public IndexModel()
+        {
+            servicio = new ServicioCarrera();
         }
+
+
+        public void OnGet()
+            {
+                Carreras = servicio.ObtenerTodos();
+            }
         }
     }
