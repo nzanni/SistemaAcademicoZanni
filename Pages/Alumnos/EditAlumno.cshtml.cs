@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using SistemaAcademicoZanni.AccesoAdatos;
 using SistemaAcademicoZanni.Helpers;
 using SistemaAcademicoZanni.Models;
 using SistemaAcademicoZanni.Servicios;
@@ -18,7 +19,9 @@ namespace SistemaAcademicoZanni.Pages.Alumnos
 
         public EditAlumnoModel()
         {
-            servicio = new ServicioAlumno();
+            IAccesoDatos<Alumno> acceso = new AccesoDatosJson<Alumno>("Alumno");
+            IRepositorio<Alumno> repo = new RepositorioCrudJson<Alumno>(acceso);
+            servicio = new ServicioAlumno(repo);
         }
 
         public void OnGet(int id)

@@ -1,19 +1,21 @@
-﻿using SistemaAcademicoZanni.Models;
+﻿using SistemaAcademicoZanni.AccesoAdatos;
+using SistemaAcademicoZanni.Models;
 using System.Text.Json;
 
 namespace SistemaAcademicoZanni.Servicios
 {
-    public class RepositorioCrudJson<T> where T : class
+    public class RepositorioCrudJson<T> : IRepositorio<T> where T : class
+
     {
-        private string ruta;
+        private readonly IAccesoDatos<T> _acceso;
 
-
-        public RepositorioCrudJson(string nombreArchivo)
+        public RepositorioCrudJson(IAccesoDatos<T> acceso)
         {
-            ruta = $"Data/{nombreArchivo}.json";
-
+            _acceso = acceso;
 
         }
+
+      private string ruta;
 
     public string LeerTextoDelArchivo()
         {
@@ -26,14 +28,18 @@ namespace SistemaAcademicoZanni.Servicios
         }
         public List<T> ObtenerTodos()
         {
-            string json = LeerTextoDelArchivo();
-            var lista = JsonSerializer.Deserialize<List<T>>(json);
-            return lista ?? new List<T>();
+
+
+            return _acceso.Leer();
+            //string json = LeerTextoDelArchivo();
+            //var lista = JsonSerializer.Deserialize<List<T>>(json);
+            //return lista ?? new List<T>();
         }
         private void Guardar(List<T> lista)
         {
-            var json = JsonSerializer.Serialize(lista);
-            File.WriteAllText(ruta, json);
+            _acceso.Guardar(lista);
+            //var json = JsonSerializer.Serialize(lista);
+            //File.WriteAllText(ruta, json);
         }
     
     public int ObtenerNuevoId(List<T> lista)
@@ -59,7 +65,7 @@ namespace SistemaAcademicoZanni.Servicios
             propiedadId.SetValue(entidad, nuevoId);
 
             lista.Add(entidad);
-    Guardar(lista);
+             Guardar(lista);
         }
 
         private T? BuscarEnListaPorId(List<T> lista, int id)

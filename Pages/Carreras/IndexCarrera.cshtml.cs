@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using SistemaAcademicoZanni.AccesoAdatos;
 using SistemaAcademicoZanni.Models;
 using SistemaAcademicoZanni.Servicios;
 using static SistemaAcademicoZanni.Data.DatosCompartidosModel;
@@ -14,7 +15,9 @@ namespace SistemaAcademicoZanni.Pages.Carreras
 
         public IndexModel()
         {
-            servicio = new ServicioCarrera();
+            IAccesoDatos<Carrera> acceso = new AccesoDatosJson<Carrera>("Carrera");
+            IRepositorio<Carrera> repo = new RepositorioCrudJson<Carrera>(acceso);
+            servicio = new ServicioCarrera(repo);
         }
 
 

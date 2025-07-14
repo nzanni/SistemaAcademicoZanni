@@ -7,34 +7,35 @@ namespace SistemaAcademicoZanni.Servicios
     public class ServicioAlumno
     {
 
-        private readonly RepositorioCrudJson<Alumno> crud;
-        public ServicioAlumno()
+        private readonly IRepositorio<Alumno> _repo;
+
+        public ServicioAlumno(IRepositorio<Alumno> repo)
         {
-            crud = new RepositorioCrudJson<Alumno>("alumnos");
+            _repo = repo;
         }
         public List<Alumno> ObtenerTodos()
         {
-            return crud.ObtenerTodos();
+            return _repo.ObtenerTodos();
         }
 
         public void Agregar(Alumno alumno)
         {
-            crud.Agregar(alumno);
+            _repo.Agregar(alumno);
         }
 
         public Alumno? BuscarPorId(int id)
         {
-            return crud.BuscarPorId(id);
+            return _repo.BuscarPorId(id);
         }
 
         public void Editar(Alumno alumno)
         {
-            crud.Editar(alumno);
+            _repo.Editar(alumno);
         }
 
         public void EliminarPorId(int id)
         {
-            crud.EliminarPorId(id);
+            _repo.EliminarPorId(id);
         }
 
     }

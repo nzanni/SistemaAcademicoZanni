@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using SistemaAcademicoZanni.AccesoAdatos;
 using SistemaAcademicoZanni.Models;
 using SistemaAcademicoZanni.Servicios;
 using static SistemaAcademicoZanni.Data.DatosCompartidosModel;
@@ -15,7 +16,9 @@ namespace SistemaAcademicoZanni.Pages.Alumnos
 
         public DeleteAlumnoModel()
         {
-            servicio = new ServicioAlumno();
+            IAccesoDatos<Alumno> acceso = new AccesoDatosJson<Alumno>("Alumno");
+            IRepositorio<Alumno> repo = new RepositorioCrudJson<Alumno>(acceso);
+            servicio = new ServicioAlumno(repo);
         }
 
         public IActionResult OnGet(int id)

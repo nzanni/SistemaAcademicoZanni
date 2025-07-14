@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using SistemaAcademicoZanni.AccesoAdatos;
 using SistemaAcademicoZanni.Helpers;
 using SistemaAcademicoZanni.Models;
 using SistemaAcademicoZanni.Servicios;
@@ -17,7 +18,9 @@ namespace SistemaAcademicoZanni.Pages.Carreras
 
         public EditCarreraModel()
         {
-            servicio = new ServicioCarrera();
+            IAccesoDatos<Carrera> acceso = new AccesoDatosJson<Carrera>("Carrera");
+            IRepositorio<Carrera> repo = new RepositorioCrudJson<Carrera>(acceso);
+            servicio = new ServicioCarrera(repo);
         }
 
         public void OnGet(int id)
